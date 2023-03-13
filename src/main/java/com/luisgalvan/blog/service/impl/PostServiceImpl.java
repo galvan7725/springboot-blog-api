@@ -1,6 +1,7 @@
 package com.luisgalvan.blog.service.impl;
 
 import com.luisgalvan.blog.dto.PostDto;
+import com.luisgalvan.blog.exception.ResourceNotFoundException;
 import com.luisgalvan.blog.model.Post;
 import com.luisgalvan.blog.repository.PostRepository;
 import com.luisgalvan.blog.service.PostService;
@@ -32,6 +33,13 @@ public class PostServiceImpl implements PostService {
     public List<PostDto> getAllPosts() {
         List<Post> posts = postRepository.findAll();
         return posts.stream().map(post -> mapToDTO(post)).collect(Collectors.toList());
+    }
+
+    @Override
+    public PostDto getPostByID(long id) {
+    Post post = postRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Post ","id" ,id));
+    PostDto postDto = mapToDTO(post);
+    return postDto;
     }
 
     private PostDto mapToDTO(Post post){
