@@ -38,4 +38,10 @@ public class PostController {
     public ResponseEntity<Object> updatePost(@RequestBody PostDto postDto, @PathVariable(name = "id") long id){
         return new ResponseEntity<>(postService.updatePost(postDto,id),HttpStatus.OK);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deletePost(@PathVariable(name = "id") long id){
+        postService.deletePost(id);
+        return new ResponseEntity<>( "Post delete succesfully",HttpStatus.OK);
+    }
 }
