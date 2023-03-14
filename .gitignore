@@ -6,7 +6,7 @@ target/
 
 ##application properties##
 *.properties
-
+*.env
 
 ### STS ###
 .apt_generated
